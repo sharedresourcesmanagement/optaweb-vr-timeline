@@ -33,13 +33,14 @@ import { routeOperations } from 'store/route';
 import { LatLng, Location, RouteWithTrack } from 'store/route/types';
 import { AppState } from 'store/types';
 import LocationList from 'ui/components/LocationList';
-import RouteMap from 'ui/components/RouteMap';
+//timeline
+
 
 export interface StateProps {
   depot: Location | null;
   visits: Location[];
   routes: RouteWithTrack[];
-  boundingBox: [LatLng, LatLng] | null;
+ 
   userViewport: UserViewport;
 }
 
@@ -53,7 +54,7 @@ const mapStateToProps = ({ plan, serverInfo, userViewport }: AppState): StatePro
   depot: plan.depot,
   visits: plan.visits,
   routes: plan.routes,
-  boundingBox: serverInfo.boundingBox,
+
   userViewport,
 });
 
@@ -70,7 +71,7 @@ export interface RouteState {
   selectedRouteId: number;
 }
 
-export class Timeline extends React.Component<RouteProps, RouteState> {
+export class TimelinePage extends React.Component<RouteProps, RouteState> {
   constructor(props: RouteProps) {
     super(props);
 
@@ -93,7 +94,7 @@ export class Timeline extends React.Component<RouteProps, RouteState> {
   render() {
     const { selectedId, selectedRouteId } = this.state;
     const {
-      boundingBox,
+   
       userViewport,
       depot,
       visits,
@@ -148,17 +149,7 @@ export class Timeline extends React.Component<RouteProps, RouteState> {
             />
           </SplitItem>
           <SplitItem isFilled>
-            <RouteMap
-              boundingBox={boundingBox}
-              userViewport={userViewport}
-              updateViewport={updateViewport}
-              selectedId={selectedId}
-              clickHandler={this.handleMapClick}
-              removeHandler={removeHandler}
-              depot={depot}
-              visits={visits}
-              routes={filteredRoutes}
-            />
+         
           </SplitItem>
         </Split>
       </>
@@ -169,4 +160,4 @@ export class Timeline extends React.Component<RouteProps, RouteState> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Timeline);
+)(TimelinePage);

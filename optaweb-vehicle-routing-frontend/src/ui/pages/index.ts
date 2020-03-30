@@ -18,6 +18,6 @@ import Demo from './Demo';
 import Route from './Route';
 import Vehicles from './Vehicles';
 import Visits from './Visits';
-import Timeline from './Timeline'
+import TimelinePage from './TimelinePage'
 
-export { Demo, Vehicles, Visits, Route, Timeline };
+export { Demo, Vehicles, Visits, Route, TimelinePage };
