@@ -35,14 +35,13 @@ import { AppState } from 'store/types';
 import LocationList from 'ui/components/LocationList';
 import RouteMap from 'ui/components/RouteMap';
 import TimelineChart from 'ui/components/TimelineChart';
-import "react-calendar-timeline/lib/Timeline.css";
+import 'ui/components/Timeline.css';
 import "./chartStyleSticky/chartStyleSticky.css";
 
 export interface StateProps {
   depot: Location | null;
   visits: Location[];
   routes: RouteWithTrack[];
-  boundingBox: [LatLng, LatLng] | null;
   userViewport: UserViewport;
 }
 
@@ -56,7 +55,6 @@ const mapStateToProps = ({ plan, serverInfo, userViewport }: AppState): StatePro
   depot: plan.depot,
   visits: plan.visits,
   routes: plan.routes,
-  boundingBox: serverInfo.boundingBox,
   userViewport,
 });
 
@@ -96,7 +94,6 @@ export class TimelinePage extends React.Component<RouteProps, RouteState> {
   render() {
     const { selectedId, selectedRouteId } = this.state;
     const {
-      boundingBox,
       userViewport,
       depot,
       visits,
@@ -113,72 +110,20 @@ export class TimelinePage extends React.Component<RouteProps, RouteState> {
     return (
       <>
         <TextContent>
-          <Text component={TextVariants.h1}>Route</Text>
+          <Text component={TextVariants.h1}>Timeline</Text>
         </TextContent>
-        <h3>Switching between flex-direction column and row at breakpoints (
-          <code>-on-lg</code>). To control the width of the flex item, set
-          <code>.pf-m-flex-1</code>on the flex group containing the long paragraph text.</h3>
-        <div className="pf-l-flex pf-m-column pf-m-row-on-lg">
-          <div className="pf-l-flex pf-m-flex-1">
-            <div className="pf-l-flex__item">Flex item</div>
-            <div className="pf-l-flex__item pf-m-flex-1">
-              crono
-            </div>
-          </div>
-          <div className="pf-l-flex pf-m-column">
-            <div className="pf-l-flex__item">Flex item</div>
-            <div className="pf-l-flex__item">Flex item</div>
-          </div>
-        </div>
-    
-        <Split gutter={GutterSize.md}>
-          <SplitItem
-            isFilled={false}
-            // style={{ display: 'flex', flexDirection: 'column' }}
-          >
-            <Form>
-              <FormSelect
-                style={{ backgroundColor: 'white', marginBottom: 10 }}
-                isDisabled={routes.length === 0}
-                value={selectedRouteId}
-                onChange={(e) => {
-                  this.setState({ selectedRouteId: parseInt(e as unknown as string, 10) });
-                }}
-                aria-label="FormSelect Input"
-              >
-                {routes.map(
-                  (route, index) => (
-                    <FormSelectOption
-                      isDisabled={false}
-                      // eslint-disable-next-line react/no-array-index-key
-                      key={index}
-                      value={index}
-                      label={route.vehicle.name}
-                    />
-                  ),
-                )}
-              </FormSelect>
-            </Form>
-            <LocationList
-              depot={depot}
-              visits={filteredVisits}
-              removeHandler={removeHandler}
-              selectHandler={this.onSelectLocation}
-            />
-          </SplitItem>
+        <Split gutter={GutterSize.md}>         
           <SplitItem isFilled style={{
-          // display: 'flex',
-          // flexDirection: 'column',
-          overflowY: 'auto',
-          overflowX: 'auto',
-          height: '100%',
-          width: '100%'
-        }}>
+            overflowY: 'auto',
+            overflowX: 'auto',
+            height: '100%',
+            width: '100%'
+          }}>
             <TimelineChart/>            
           </SplitItem>
           <SplitItem
             isFilled={false}
-            // style={{ display: 'flex', flexDirection: 'column' }}
+            style={{ display: 'flex', flexDirection: 'column' }}
           >
           </SplitItem>
           TESTE
