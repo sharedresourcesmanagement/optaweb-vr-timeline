@@ -22,7 +22,7 @@ import { Link, withRouter } from 'react-router-dom';
 export const Navigation = ({ location }: RouteComponentProps) => (
   <Nav aria-label="Nav">
     <NavList variant={NavVariants.horizontal}>
-      {['Vehicles', 'Visits', 'Route', 'Timeline', 'Demo'].map((label) => {
+      {['Vehicles', 'Visits', 'Route', 'TimelinePage', 'Demo'].map((label) => {
         const itemId = label.toLowerCase();
         const path = `/${itemId}`;
         return (
