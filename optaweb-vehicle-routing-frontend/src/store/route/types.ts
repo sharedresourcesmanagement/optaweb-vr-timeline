@@ -15,6 +15,8 @@
  */
 
 import { Action } from 'redux';
+import { GanttData } from 'store/timeline/types';
+import { RoutingPlanAndGanttData } from './reducers';
 
 export interface LatLng {
   readonly lat: number;
@@ -89,7 +91,7 @@ export interface VehicleCapacity {
 }
 
 export interface UpdateRouteAction extends Action<ActionType.UPDATE_ROUTING_PLAN> {
-  readonly plan: RoutingPlan;
+  readonly planAndGanttData: RoutingPlanAndGanttData;
 }
 
 export type RouteAction =

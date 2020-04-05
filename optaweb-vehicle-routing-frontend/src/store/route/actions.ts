@@ -26,6 +26,7 @@ import {
   RoutingPlan,
   UpdateRouteAction,
 } from './types';
+import { RoutingPlanAndGanttData } from './reducers';
 
 export const addVehicle: ActionFactory<void, AddVehicleAction> = () => ({
   type: ActionType.ADD_VEHICLE,
@@ -50,7 +51,8 @@ export const clearRoute: ActionFactory<void, ClearRouteAction> = () => ({
   type: ActionType.CLEAR_SOLUTION,
 });
 
-export const updateRoute: ActionFactory<RoutingPlan, UpdateRouteAction> = plan => ({
-  plan,
+export const updateRoute: ActionFactory<RoutingPlanAndGanttData, UpdateRouteAction> = planAndGanttData => (
+  {
+  planAndGanttData,
   type: ActionType.UPDATE_ROUTING_PLAN,
 });

@@ -18,6 +18,7 @@ import SockJS from 'sockjs-client';
 import { LatLngWithDescription, RoutingPlan } from 'store/route/types';
 import { ServerInfo } from 'store/server/types';
 import { Client, Frame, over } from 'webstomp-client';
+import { RoutingPlanAndGanttData } from 'store/route/reducers';
 
 export default class WebSocketClient {
   readonly socketUrl: string;
@@ -105,11 +106,11 @@ export default class WebSocketClient {
     }
   }
 
-  subscribeToRoute(subscriptionCallback: (plan: RoutingPlan) => any): void {
+  subscribeToRoute(subscriptionCallback: (planAndGanttData: RoutingPlanAndGanttData) => any): void {
     if (this.stompClient) {
       this.stompClient.subscribe('/topic/route', (message) => {
-        const plan = JSON.parse(message.body);
-        subscriptionCallback(plan);
+        const planAndGanttData = JSON.parse(message.body);
+        subscriptionCallback(planAndGanttData);
       });
     }
   }

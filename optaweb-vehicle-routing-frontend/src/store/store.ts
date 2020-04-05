@@ -27,6 +27,7 @@ import routeReducer from './route';
 import serverInfoReducer from './server';
 import { AppState } from './types';
 import connectionReducer from './websocket';
+import timelineReducer from './timeline';
 
 export interface StoreConfig {
   readonly socketUrl: string;
@@ -51,6 +52,7 @@ export function configureStore(
     demo: demoReducer,
     plan: routeReducer,
     userViewport: clientReducer,
+    ganttData: timelineReducer
   });
 
   /* if (process.env.NODE_ENV !== 'production' && module.hot) {

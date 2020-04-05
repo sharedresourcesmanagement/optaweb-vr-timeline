@@ -24,6 +24,7 @@ import {
   Text,
   TextContent,
   TextVariants,
+  Button,
 } from '@patternfly/react-core';
 import * as React from 'react';
 import { connect } from 'react-redux';
@@ -37,12 +38,20 @@ import RouteMap from 'ui/components/RouteMap';
 import TimelineChart from 'ui/components/TimelineChart';
 import 'ui/components/Timeline.css';
 import "./chartStyleSticky/chartStyleSticky.css";
+import generateFakeData from 'ui/components/generate-fake-data/generate-fake-data';
+import generateTimelineData from 'ui/components/timelineData/generateTimelineData';
 
 export interface StateProps {
   depot: Location | null;
   visits: Location[];
   routes: RouteWithTrack[];
   userViewport: UserViewport;
+}
+
+
+export interface GanttProps {
+  groups: any;
+  items: any; 
 }
 
 export interface DispatchProps {
@@ -64,7 +73,7 @@ const mapDispatchToProps: DispatchProps = {
   updateViewport: clientOperations.updateViewport,
 };
 
-export type RouteProps = DispatchProps & StateProps;
+export type RouteProps = DispatchProps & StateProps & GanttProps;
 
 export interface RouteState {
   selectedId: number;
@@ -78,9 +87,16 @@ export class TimelinePage extends React.Component<RouteProps, RouteState> {
     this.state = {
       selectedId: NaN,
       selectedRouteId: 0,
+     
     };
     this.onSelectLocation = this.onSelectLocation.bind(this);
     this.handleMapClick = this.handleMapClick.bind(this);
+    
+    const groups = [];
+    const items =[];
+
+   
+
   }
 
   handleMapClick(e: any) {
@@ -91,7 +107,10 @@ export class TimelinePage extends React.Component<RouteProps, RouteState> {
     this.setState({ selectedId: id });
   }
 
+
+  
   render() {
+    
     const { selectedId, selectedRouteId } = this.state;
     const {
       userViewport,
@@ -107,11 +126,18 @@ export class TimelinePage extends React.Component<RouteProps, RouteState> {
       routes.map((value, index) => (index === selectedRouteId ? value : { visits: [], track: [] }))
     );
     const filteredVisits: Location[] = routes.length > 0 ? routes[selectedRouteId].visits : [];
+    console.log("TimelinePage Render this.props.routes");
+    console.log(this.props.routes);
+    console.log("TimelinePage Render this.props.groups");
+    console.log(this.props.groups);
     return (
       <>
         <TextContent>
           <Text component={TextVariants.h1}>Timeline</Text>
         </TextContent>
+        <Button>
+           
+        </Button>
         <Split gutter={GutterSize.md}>         
           <SplitItem isFilled style={{
             overflowY: 'auto',

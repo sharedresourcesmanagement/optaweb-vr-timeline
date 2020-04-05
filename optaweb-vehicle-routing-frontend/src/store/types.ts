@@ -22,6 +22,7 @@ import { Demo } from './demo/types';
 import { RoutingPlan } from './route/types';
 import { ServerInfo } from './server/types';
 import { WebSocketConnectionStatus } from './websocket/types';
+import { GanttData } from './timeline/types';
 
 /**
  * ThunkCommand is a ThunkAction that has no result (it's typically something like
@@ -59,4 +60,5 @@ export interface AppState {
   readonly connectionStatus: WebSocketConnectionStatus;
   readonly demo: Demo;
   readonly userViewport: UserViewport;
+  readonly ganttData: GanttData;
 }
